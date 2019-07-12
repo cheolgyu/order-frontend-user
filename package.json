@@ -1,0 +1,28 @@
+{
+  "name": "order-frontend-user",
+  "version": "1.0.0",
+  "description": "My groovy Nuxt.js project",
+  "author": "cheolgyu",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/vuetify": "0.5.5",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/dotenv": "^1.3.0",
+    "@nuxtjs/pwa": "^2.6.0",
+    "cross-env": "^5.2.0",
+    "dotenv-expand": "^5.1.0",
+    "nuxt": "^2.0.0",
+    "vue-i18n": "^8.12.0"
+  },
+  "devDependencies": {
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "nodemon": "^1.18.9"
+  }
+}
