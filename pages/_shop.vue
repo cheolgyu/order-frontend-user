@@ -4,12 +4,7 @@
       <v-card>
         <v-card-title class="headline">{{shop.name}}</v-card-title>
         <v-list two-line>
-          <v-list-group
-            v-for="item in products"
-            :key="item.id"
-            :prepend-icon="item.action"
-            no-action
-          >
+          <v-list-group v-for="item in products" :key="item.id">
             <template v-slot:activator>
               <v-list-tile avatar>
                 <v-list-tile-avatar>
@@ -24,6 +19,11 @@
                 <v-list-tile-action>
                   <v-list-tile-action-text>{{ item.price }}원</v-list-tile-action-text>
                 </v-list-tile-action>
+                <v-list-tile-action>
+                  <v-btn icon ripple @click.stop="btn_alert">
+                    <v-icon color="grey lighten-1">shopping_cart</v-icon>
+                  </v-btn>
+                </v-list-tile-action>
               </v-list-tile>
             </template>
 
@@ -37,11 +37,12 @@
                 <template v-if="option_group.option_list.length == 1">
                   <v-slider
                     thumb-label="always"
-                    :max="3"
+                    :max="6"
                     :label="option_group.option_list[0].name"
                     small-chips="true"
                     ticks="always"
                     tick-size="1"
+                    value="1"
                   ></v-slider>
                 </template>
                 <template v-else>
@@ -97,6 +98,10 @@ export default {
     //this.init();
   },
 
-  methods: {}
+  methods: {
+    btn_alert() {
+      console.log("btn_alert");
+    }
+  }
 };
 </script>
