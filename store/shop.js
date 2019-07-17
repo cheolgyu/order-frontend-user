@@ -1,15 +1,17 @@
 export const state = () => ({
-  shop: null
+  shop: null,
+  products: null
 });
 
 export const actions = {
-  async get({ commit, rootState }, params) {
+  get({ commit, rootState }, params) {
     console.log("11", params);
-    return await this.$axios
+    return this.$axios
       .get(params)
       .then(res => {
         if (res.status === 200) {
-          commit("SET_SHOP", res.data);
+          console.log("SET_SHOP", res.data.data);
+          commit("SET_SHOP", res.data.data);
           return res.state
         }
       });
@@ -19,6 +21,7 @@ export const actions = {
 
 export const mutations = {
   SET_SHOP(state, params) {
-    state.shop = params;
+    state.shop = params.shop;
+    state.products = params.product;
   }
 };
