@@ -42,24 +42,22 @@
                     small-chips="true"
                     ticks="always"
                     tick-size="1"
-                    value="1"
+                    :value="1"
                   ></v-slider>
                 </template>
+
                 <template v-else>
                   <v-select
+                    v-model="option_group.default"
                     :items="option_group.option_list"
                     :label="option_group.name"
-                    return-object
                     item-text="name"
+                    item-value="id"
                   >
                     <template v-slot:selection="{ item, index }">
-                      <v-chip v-if="index === 0">
+                      <v-chip>
                         <span>{{ item.name }}+{{ item.price }}원</span>
                       </v-chip>
-                      <span
-                        v-if="index === 1"
-                        class="grey--text caption"
-                      >(+{{ value.length - 1 }} others)</span>
                     </template>
                     <template v-slot:item="{ item, index }">{{ item.name }} +{{ item.price }}원</template>
                   </v-select>
