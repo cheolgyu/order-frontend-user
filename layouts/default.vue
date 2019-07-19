@@ -25,11 +25,15 @@
         <nuxt />
       </v-container>
     </v-content>
+    <cart />
   </v-app>
 </template>
 
 <script>
+import cart from "~/components/cart.vue";
+
 export default {
+  components: { cart },
   data() {
     return {
       items: [

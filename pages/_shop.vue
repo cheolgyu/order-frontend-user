@@ -2,7 +2,7 @@
   <v-layout>
     <v-flex xs12 sm8 md6 round>
       <v-card>
-        <v-card-title class="headline">{{shop.name}}</v-card-title>
+        <v-card-title class="headline" v-if="shop != null">{{shop.name}}</v-card-title>
         <v-list two-line>
           <v-list-group v-for="item in products" :key="item.id">
             <template v-slot:activator>
@@ -20,7 +20,7 @@
                   <v-list-tile-action-text>{{ item.price }}원</v-list-tile-action-text>
                 </v-list-tile-action>
                 <v-list-tile-action>
-                  <v-btn icon ripple @click.stop="btn_alert">
+                  <v-btn icon ripple @click.stop="btn_alert(item)">
                     <v-icon color="grey lighten-1">shopping_cart</v-icon>
                   </v-btn>
                 </v-list-tile-action>
@@ -89,7 +89,8 @@ export default {
   computed: {
     ...mapState({
       shop: state => state.shop.shop,
-      products: state => state.shop.products
+      products: state => state.shop.products,
+      cart: state => state.list
     }),
     test() {}
   },
@@ -99,8 +100,9 @@ export default {
   },
 
   methods: {
-    btn_alert() {
-      console.log("btn_alert");
+    btn_alert(item) {
+      console.log("btn_alert", item);
+      this.$store.dispatch("cart/push", item).then(res => {});
     }
   }
 };
