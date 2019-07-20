@@ -1,27 +1,25 @@
 <template>
-  <v-app dark>
-    <v-toolbar fixed app>
-      <v-toolbar-title to="/" v-text="title" />
-      <v-spacer />
-      <v-btn to="/login" dark icon>
-        <v-icon>person</v-icon>
-      </v-btn>
-      <v-menu bottom left>
-        <template v-slot:activator="{ on }">
-          <v-btn dark icon v-on="on">
-            <v-icon>more_vert</v-icon>
-          </v-btn>
-        </template>
+  <v-app id="inspire">
+    <v-navigation-drawer v-model="drawer" app clipped>
+      <v-list dense>
+        <v-list-item v-for="item in items" :key="item.id" :to="item.to">
+          <v-list-item-action>
+            <v-icon>{{item.icon}}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{item.title}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
-        <v-list>
-          <v-list-tile v-for="(item, i) in items" :key="i" :to="item.to">
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
-    </v-toolbar>
+    <v-app-bar app clipped-left>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-app-bar>
+
     <v-content>
-      <v-container>
+      <v-container fluid fill-height>
         <nuxt />
       </v-container>
     </v-content>
@@ -31,30 +29,34 @@
 
 <script>
 import cart from "~/components/cart.vue";
-
 export default {
   components: { cart },
-  data() {
-    return {
-      items: [
-        {
-          icon: "apps",
-          title: "Welcome",
-          to: "/"
-        },
-        {
-          icon: "bubble_chart",
-          title: "회원가입",
-          to: "/join"
-        },
-        {
-          icon: "bubble_chart",
-          title: "로그인",
-          to: "/login"
-        }
-      ],
-      title: "사용자"
-    };
+  props: {
+    source: String
+  },
+  data: () => ({
+    drawer: null,
+    items: [
+      {
+        icon: "home",
+        title: "Welcome",
+        to: "/"
+      },
+      {
+        icon: "settings",
+        title: "회원가입",
+        to: "/join"
+      },
+      {
+        icon: "dashboard",
+        title: "로그인",
+        to: "/login"
+      }
+    ],
+    title: "사용자"
+  }),
+  created() {
+    this.$vuetify.theme.dark = true;
   }
 };
 </script>

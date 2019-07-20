@@ -1,6 +1,6 @@
 
 <template>
-  <v-footer dark height="auto" fixed>
+  <v-footer app dark height="auto" fixed>
     <v-badge right overlap color="orange" :key="item.id" v-for="item in cart">
       <span slot="badge">{{item.cnt}}</span>
       <v-avatar color="light-blue darken-3">
