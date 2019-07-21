@@ -6,7 +6,7 @@
         <v-list>
           <v-list-group v-for="item in products" :key="item.id" no-action>
             <template v-slot:activator>
-              <v-list-item-action>
+              <v-list-item-action small>
                 <v-avatar color="light-blue darken-3">
                   <span class="white--text headline" v-text="item.name.charAt(0)"></span>
                 </v-avatar>
