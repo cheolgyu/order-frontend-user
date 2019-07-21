@@ -37,6 +37,7 @@
                       <span>{{ item.name }}+{{ item.price }}원 {{item.html_type}}</span>
                     </v-chip>
                   </template>
+                  <template v-slot:item="{ item, index }">{{ item.name }} +{{ item.price }}원</template>
                   <template v-if="item.html_type='i'">
                     <v-slider
                       thumb-label="always"
@@ -48,7 +49,6 @@
                       :value="1"
                     ></v-slider>
                   </template>
-                  <template v-slot:item="{ item, index }">{{ item.name }} +{{ item.price }}원</template>
                 </v-select>
               </v-list-item-content>
             </v-list-item>
