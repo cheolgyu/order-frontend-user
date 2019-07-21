@@ -24,30 +24,36 @@
             <v-list-item v-for="option_group in item.option_group_list" :key="option_group.id">
               <v-list-item-content>
                 <v-select
-                  v-model="option_group.default"
                   :items="option_group.option_list"
                   :label="option_group.name"
                   item-text="name"
                   item-value="id"
                   :change="chg_option_group(item)"
                   filled
+                  rounded
+                  attach
                 >
-                  <template v-slot:selection="{ item, index }">
-                    <v-chip>
-                      <span>{{ item.name }}+{{ item.price }}원 {{item.html_type}}</span>
-                    </v-chip>
-                  </template>
                   <template v-slot:item="{ item, index }">{{ item.name }} +{{ item.price }}원</template>
-                  <template v-if="item.html_type='i'">
-                    <v-slider
-                      thumb-label="always"
-                      :max="6"
-                      :label="option_group.option_list[0].name"
-                      small-chips="true"
-                      ticks="always"
-                      tick-size="1"
-                      :value="1"
-                    ></v-slider>
+                  <template v-slot:selection="{ item, index }">
+                    <v-layout column>
+                      <v-flex m-5>
+                        <v-chip small>{{ item.name }}</v-chip>
+                        <v-list-item-action-text xsmall>+ {{ item.price }}원</v-list-item-action-text>
+                      </v-flex>
+                      <v-flex mt-5 v-if="item.html_type=='i'">
+                        <v-slider
+                          m-5
+                          thumb-label="always"
+                          :max="6"
+                          small-chips="true"
+                          ticks="always"
+                          tick-size="1"
+                          :value="1"
+                        ></v-slider>
+                      </v-flex>
+                    </v-layout>
+                    <v-flex></v-flex>
+                    <v-spacer></v-spacer>
                   </template>
                 </v-select>
               </v-list-item-content>
