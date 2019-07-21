@@ -3,15 +3,75 @@
     <v-flex xs12 sm8 md6 round>
       <v-card>
         <v-card-title class="headline" v-if="shop != null">{{shop.name}}</v-card-title>
-        <v-list two-line>
-          <v-list-group v-for="item in products" :key="item.id">
+        <v-list>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>home</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+
+          <v-list-group v-for="item in products" :key="item.id" no-action>
             <template v-slot:activator>
-              <v-list-tile avatar>
-                <v-list-tile-avatar>
+              <v-list-item-action>
+                <v-avatar color="light-blue darken-3">
+                  <span class="white--text headline" v-text="item.name.charAt(0)"></span>
+                </v-avatar>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.name" />
+              </v-list-item-content>
+              <v-list-item-action>
+                <v-list-item-action-text v-text="item.price+' 원'" />
+                <v-btn icon ripple @click.stop="btn_alert(item)">
+                  <v-icon color=" lighten-1">shopping_cart</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </template>
+            <v-list-item v-for="option_group in item.option_group_list" :key="option_group.id">
+              <v-list-item-content>
+                <v-select
+                  v-model="option_group.default"
+                  :items="option_group.option_list"
+                  :label="option_group.name"
+                  item-text="name"
+                  item-value="id"
+                  :change="chg_option_group(item)"
+                  filled
+                >
+                  <template v-slot:selection="{ item, index }">
+                    <v-chip>
+                      <span>{{ item.name }}+{{ item.price }}원 {{item.html_type}}</span>
+                    </v-chip>
+                  </template>
+                  <template v-if="item.html_type='i'">
+                    <v-slider
+                      thumb-label="always"
+                      :max="6"
+                      :label="option_group.option_list[0].name"
+                      small-chips="true"
+                      ticks="always"
+                      tick-size="1"
+                      :value="1"
+                    ></v-slider>
+                  </template>
+                  <template v-slot:item="{ item, index }">{{ item.name }} +{{ item.price }}원</template>
+                </v-select>
+              </v-list-item-content>
+            </v-list-item>
+
+            <!--
+            <template v-slot:activator>
+
+              <v-list-tile>
+              
+                <v-list-tile-avatar v-text="item.name">
                   <v-avatar color="light-blue darken-3">
                     <span class="white--text headline">{{ item.name.charAt(0) }}</span>
                   </v-avatar>
                 </v-list-tile-avatar>
+               
                 <v-list-tile-content>
                   <v-list-tile-title>{{ item.name }}</v-list-tile-title>
                   <v-list-tile-sub-title>aaaaaaa</v-list-tile-sub-title>
@@ -24,46 +84,10 @@
                     <v-icon color="grey lighten-1">shopping_cart</v-icon>
                   </v-btn>
                 </v-list-tile-action>
+               
               </v-list-tile>
             </template>
-
-            <v-list
-              avatar
-              two-line
-              v-for="option_group in item.option_group_list"
-              :key="option_group.id"
-            >
-              <v-list-tile avatar>
-                <template v-if="option_group.option_list.length == 1">
-                  <v-slider
-                    thumb-label="always"
-                    :max="6"
-                    :label="option_group.option_list[0].name"
-                    small-chips="true"
-                    ticks="always"
-                    tick-size="1"
-                    :value="1"
-                  ></v-slider>
-                </template>
-
-                <template v-else>
-                  <v-select
-                    v-model="option_group.default"
-                    :items="option_group.option_list"
-                    :label="option_group.name"
-                    item-text="name"
-                    item-value="id"
-                  >
-                    <template v-slot:selection="{ item, index }">
-                      <v-chip>
-                        <span>{{ item.name }}+{{ item.price }}원</span>
-                      </v-chip>
-                    </template>
-                    <template v-slot:item="{ item, index }">{{ item.name }} +{{ item.price }}원</template>
-                  </v-select>
-                </template>
-              </v-list-tile>
-            </v-list>
+            -->
           </v-list-group>
         </v-list>
       </v-card>
@@ -101,6 +125,9 @@ export default {
     btn_alert(item) {
       console.log("btn_alert", item);
       this.$store.dispatch("cart/push", item).then(res => {});
+    },
+    chg_option_group(item) {
+      console.log("chg_option_group", item);
     }
   }
 };
