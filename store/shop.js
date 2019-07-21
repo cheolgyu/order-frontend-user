@@ -1,6 +1,9 @@
 export const state = () => ({
   shop: null,
-  products: null
+  products: {
+    orgin: null,
+    edit: null
+  }
 });
 
 export const actions = {
@@ -16,12 +19,19 @@ export const actions = {
         }
       });
 
+  },
+  chg_option_group({ commit, rootState }, params) {
+    commit("CHG_OPTION_GROUP", params);
   }
 };
 
 export const mutations = {
   SET_SHOP(state, params) {
     state.shop = params.shop;
-    state.products = params.product;
+    state.products.orgin = params.product;
+    state.products.edit = params.product;
+  },
+  CHG_OPTION_GROUP(state, params) {
+    console.log("CHG_OPTION_GROUP", params)
   }
 };

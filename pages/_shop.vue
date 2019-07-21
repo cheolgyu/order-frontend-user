@@ -3,34 +3,36 @@
     <v-flex xs12 sm8 md6 round>
       <v-card>
         <v-list>
-          <v-list-group v-for="item in products" :key="item.id" no-action>
+          <v-list-group v-for="product in products" :key="product.id" no-action>
             <template v-slot:activator>
               <v-list-item-action small>
                 <v-avatar color="light-blue darken-3">
-                  <span class="white--text headline" v-text="item.name.charAt(0)"></span>
+                  <span class="white--text headline" v-text="product.name.charAt(0)"></span>
                 </v-avatar>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title v-text="item.name" />
+                <v-list-item-title v-text="product.name" />
               </v-list-item-content>
               <v-list-item-action>
-                <v-list-item-action-text v-text="item.price+' 원'" />
-                <v-btn icon ripple @click.stop="btn_alert(item)">
+                <v-list-item-action-text v-text="product.price+' 원'" />
+                <v-btn icon ripple @click.stop="btn_alert(product)">
                   <v-icon color=" lighten-1">shopping_cart</v-icon>
                 </v-btn>
               </v-list-item-action>
             </template>
-            <v-list-item v-for="option_group in item.option_group_list" :key="option_group.id">
+            <v-list-item v-for="option_group in product.option_group_list" :key="option_group.id">
               <v-list-item-content>
                 <v-select
                   :items="option_group.option_list"
                   :label="option_group.name"
+                  :value="option_group.default"
                   item-text="name"
                   item-value="id"
-                  :change="chg_option_group(item)"
+                  @change="chg_option_group(product.id,option_group.id,$event)"
                   filled
                   rounded
                   attach
+                  return-object
                 >
                   <template v-slot:item="{ item, index }">{{ item.name }} +{{ item.price }}원</template>
                   <template v-slot:selection="{ item, index }">
@@ -80,10 +82,13 @@ export default {
   computed: {
     ...mapState({
       shop: state => state.shop.shop,
-      products: state => state.shop.products,
+      products: state => state.shop.products.edit,
       cart: state => state.list
     }),
-    test() {}
+    test() {},
+    edit: {
+      products: {}
+    }
   },
   mounted() {
     console.log(this.$route.params.shop);
@@ -95,8 +100,11 @@ export default {
       console.log("btn_alert", item);
       this.$store.dispatch("cart/push", item).then(res => {});
     },
-    chg_option_group(item) {
-      console.log("chg_option_group", item);
+    chg_option_group(p_id, optg_id, params) {
+      console.log("chg_option_group", p_id, optg_id, params);
+      this.$store.dispatch("shop/chg_option_group", params).then(res => {
+        console.log(res);
+      });
     }
   }
 };
