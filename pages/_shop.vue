@@ -4,14 +4,6 @@
       <v-card>
         <v-card-title class="headline" v-if="shop != null">{{shop.name}}</v-card-title>
         <v-list>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>home</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
-
           <v-list-group v-for="item in products" :key="item.id" no-action>
             <template v-slot:activator>
               <v-list-item-action>
@@ -60,34 +52,6 @@
                 </v-select>
               </v-list-item-content>
             </v-list-item>
-
-            <!--
-            <template v-slot:activator>
-
-              <v-list-tile>
-              
-                <v-list-tile-avatar v-text="item.name">
-                  <v-avatar color="light-blue darken-3">
-                    <span class="white--text headline">{{ item.name.charAt(0) }}</span>
-                  </v-avatar>
-                </v-list-tile-avatar>
-               
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-                  <v-list-tile-sub-title>aaaaaaa</v-list-tile-sub-title>
-                </v-list-tile-content>
-                <v-list-tile-action>
-                  <v-list-tile-action-text>{{ item.price }}원</v-list-tile-action-text>
-                </v-list-tile-action>
-                <v-list-tile-action>
-                  <v-btn icon ripple @click.stop="btn_alert(item)">
-                    <v-icon color="grey lighten-1">shopping_cart</v-icon>
-                  </v-btn>
-                </v-list-tile-action>
-               
-              </v-list-tile>
-            </template>
-            -->
           </v-list-group>
         </v-list>
       </v-card>
