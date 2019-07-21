@@ -15,7 +15,7 @@
 
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title v-if="shop != null">{{shop.name}}</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
@@ -29,6 +29,7 @@
 
 <script>
 import cart from "~/components/cart.vue";
+import { mapState, mapGetters } from "vuex";
 export default {
   components: { cart },
   props: {
@@ -57,6 +58,14 @@ export default {
   }),
   created() {
     this.$vuetify.theme.dark = true;
+  },
+  computed: {
+    ...mapState({
+      shop: state => state.shop.shop,
+      products: state => state.shop.products,
+      cart: state => state.list
+    }),
+    test() {}
   }
 };
 </script>

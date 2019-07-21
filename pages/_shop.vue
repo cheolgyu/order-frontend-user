@@ -2,7 +2,6 @@
   <v-layout>
     <v-flex xs12 sm8 md6 round>
       <v-card>
-        <v-card-title class="headline" v-if="shop != null">{{shop.name}}</v-card-title>
         <v-list>
           <v-list-group v-for="item in products" :key="item.id" no-action>
             <template v-slot:activator>
