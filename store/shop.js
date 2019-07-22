@@ -21,7 +21,7 @@ export const actions = {
 
   },
   chg_option_group({ commit, rootState }, params) {
-    commit("CHG_OPTION_GROUP", params);
+    commit("CHG_OPTION_GROUP", params)
   }
 };
 
@@ -32,6 +32,13 @@ export const mutations = {
     state.products.edit = params.product;
   },
   CHG_OPTION_GROUP(state, params) {
-    console.log("CHG_OPTION_GROUP", params)
-  }
+    var p = state.products.edit.find(function (element) {
+      return element.id == params.p_id;
+    });
+    var optg = p.option_group_list.find(function (element) {
+      return element.id == params.optg_id;
+    });
+    optg.default = params.option.id;
+  },
+
 };

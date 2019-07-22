@@ -14,7 +14,8 @@
                 <v-list-item-title v-text="product.name" />
               </v-list-item-content>
               <v-list-item-action>
-                <v-list-item-action-text v-text="product.price+' 원'" />
+                <v-list-item-action-text v-text="'상품기본가격: '+product.price+' 원'" />
+                <v-list-item-action-text>옵션적용가: {{get_price_with_option(product)}}</v-list-item-action-text>
                 <v-btn icon ripple @click.stop="btn_alert(product)">
                   <v-icon color=" lighten-1">shopping_cart</v-icon>
                 </v-btn>
@@ -31,10 +32,11 @@
                   @change="chg_option_group(product.id,option_group.id,$event)"
                   filled
                   rounded
-                  attach
                   return-object
                 >
-                  <template v-slot:item="{ item, index }">{{ item.name }} +{{ item.price }}원</template>
+                  <template
+                    v-slot:item="{ item, index }"
+                  >{{ item.name }} +{{ item.price }}원({{option_group.default}},{{item.id}})</template>
                   <template v-slot:selection="{ item, index }">
                     <v-layout column>
                       <v-flex m-5>
@@ -86,8 +88,21 @@ export default {
       cart: state => state.list
     }),
     test() {},
-    edit: {
-      products: {}
+    get_price_with_option(item) {
+      return item => {
+        var option_value = 0;
+        for (var i in item.option_group_list) {
+          var option_group = item.option_group_list[i];
+          var opt_id = option_group.default;
+          var opt = option_group.option_list.find(function(element) {
+            return element.id == opt_id;
+          });
+
+          option_value += opt.price;
+        }
+
+        return item.price + option_value + "원";
+      };
     }
   },
   mounted() {
@@ -101,8 +116,13 @@ export default {
       this.$store.dispatch("cart/push", item).then(res => {});
     },
     chg_option_group(p_id, optg_id, params) {
-      console.log("chg_option_group", p_id, optg_id, params);
-      this.$store.dispatch("shop/chg_option_group", params).then(res => {
+      var _params = {
+        p_id: p_id,
+        optg_id: optg_id,
+        option: params
+      };
+
+      this.$store.dispatch("shop/chg_option_group", _params).then(res => {
         console.log(res);
       });
     }
