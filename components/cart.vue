@@ -62,24 +62,26 @@ export default {
       this.dialog.show = true;
       console.log("dialog", item);
     },
-    update(item) {
+    update(item, idx) {
       console.log("상품삭제", item);
-      this.$store.dispatch("cart/remove_product", item).then(res => {
+      this.$store.dispatch("cart/remove_product", idx).then(res => {
         this.$store.dispatch("cart/make_total", item).then(res => {
           this.$store.dispatch("cart/show_simple_list", item).then();
         });
       });
     },
-    chg_option_group(p_id, optg_id, params) {
+    chg_option_group(p_id, optg_id, params, idx, idx2) {
       var _params = {
         p_id: p_id,
         optg_id: optg_id,
-        option: params
+        option: params,
+        idx: idx,
+        idx2: idx2
       };
 
       this.$store.dispatch("cart/chg_option_group", _params).then(res => {
         this.$store.dispatch("cart/make_total", _params).then(res => {
-          this.$store.dispatch("cart/show_simple_list", item).then();
+          this.$store.dispatch("cart/show_simple_list", _params).then();
         });
       });
     }

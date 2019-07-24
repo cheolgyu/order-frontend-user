@@ -15,7 +15,7 @@
             <v-list-item-action>
               <v-list-item-action-text v-text="'상품기본가격: '+product.price+' 원'" />
               <v-list-item-action-text>옵션적용가: {{get_price_with_option(product)}}</v-list-item-action-text>
-              <v-btn icon ripple @click.stop="obj.btn.fn(product)">
+              <v-btn icon ripple @click.stop="obj.btn.fn(product,idx)">
                 <v-icon color=" lighten-1">{{obj.btn.name}}</v-icon>
               </v-btn>
             </v-list-item-action>
@@ -28,7 +28,7 @@
                 :value="option_group.default"
                 item-text="name"
                 item-value="id"
-                @change="obj.event.chg_option_group(product.id,option_group.id,$event)"
+                @change="obj.event.chg_option_group(product.id,option_group.id,$event,idx,idx2)"
                 filled
                 rounded
                 return-object

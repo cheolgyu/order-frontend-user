@@ -55,24 +55,12 @@ export const mutations = {
         state.show.total.cnt = state.list.length;
     },
     CHG_OPTION_GROUP(state, params) {
-        var p = state.list.find(function (element) {
-            return element.id == params.p_id;
-        });
-        var optg = p.option_group_list.find(function (element) {
-            return element.id == params.optg_id;
-        });
+        var p = state.list[params.idx];
+        var optg = p.option_group_list[params.idx2];
         optg.default = params.option.id;
     },
-    REMOVE_PRODUCT(state, params) {
-        var index = state.list.find(function (element, index) {
-            console.log("111111111111111111", element, index, params)
-            if (element.id == params.id) {
-                console.log("22222222222", element, index)
-                return index;
-            }
-        });
-        console.log("333333333333", index)
-        state.list.splice(index, 1);
+    REMOVE_PRODUCT(state, idx) {
+        state.list.splice(idx, 1);
 
     },
     SHOW_SIMPLE_LIST(state, params) {
