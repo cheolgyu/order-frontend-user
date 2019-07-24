@@ -2,7 +2,7 @@
   <v-flex xs12 sm8 md6 round>
     <v-card>
       <v-list>
-        <v-list-group v-for="product in show_items" :key="product.id" no-action>
+        <v-list-group v-for="(product,idx) in show_items" :key="idx" no-action>
           <template v-slot:activator>
             <v-list-item-action small>
               <v-avatar color="light-blue darken-3">
@@ -15,12 +15,12 @@
             <v-list-item-action>
               <v-list-item-action-text v-text="'상품기본가격: '+product.price+' 원'" />
               <v-list-item-action-text>옵션적용가: {{get_price_with_option(product)}}</v-list-item-action-text>
-              <v-btn icon ripple @click.stop="btn_alert(product)">
-                <v-icon color=" lighten-1">shopping_cart</v-icon>
+              <v-btn icon ripple @click.stop="obj.btn.fn(product)">
+                <v-icon color=" lighten-1">{{obj.btn.name}}</v-icon>
               </v-btn>
             </v-list-item-action>
           </template>
-          <v-list-item v-for="option_group in product.option_group_list" :key="option_group.id">
+          <v-list-item v-for="(option_group,idx2) in product.option_group_list" :key="idx+'_'+idx2">
             <v-list-item-content>
               <v-select
                 :items="option_group.option_list"
@@ -28,7 +28,7 @@
                 :value="option_group.default"
                 item-text="name"
                 item-value="id"
-                @change="chg_option_group(product.id,option_group.id,$event)"
+                @change="obj.event.chg_option_group(product.id,option_group.id,$event)"
                 filled
                 rounded
                 return-object
@@ -73,6 +73,10 @@ const props = {
   show_items: {
     type: Array,
     default: () => ({})
+  },
+  obj: {
+    type: Object,
+    default: () => ({})
   }
 };
 export default {
@@ -110,22 +114,6 @@ export default {
     //this.init();
   },
 
-  methods: {
-    btn_alert(item) {
-      console.log("btn_alert", item);
-      this.$store.dispatch("cart/push", item).then(res => {});
-    },
-    chg_option_group(p_id, optg_id, params) {
-      var _params = {
-        p_id: p_id,
-        optg_id: optg_id,
-        option: params
-      };
-
-      this.$store.dispatch("shop/chg_option_group", _params).then(res => {
-        console.log(res);
-      });
-    }
-  }
+  methods: {}
 };
 </script>

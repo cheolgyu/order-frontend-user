@@ -2,7 +2,7 @@
 <template>
   <v-footer app dark height="auto" fixed>
     <v-layout align-center justify-start row fill-height>
-      <v-badge right overlap color="orange" :key="item.id" v-for="item in cart.items">
+      <v-badge right overlap color="orange" :key="item.id" v-for="item in cart.show.items">
         <template v-slot:badge>{{item.cnt}}</template>
         <v-avatar color="light-blue darken-3" @click="fn_dialog(item)">
           <span class="white--text headline">{{ item.name.charAt(0) }}</span>
@@ -11,11 +11,11 @@
     </v-layout>
     <v-spacer></v-spacer>
 
-    <v-btn class="mx-3" dark icon>{{cart.total.cnt}}개 {{cart.total.price}}원 구매</v-btn>
+    <v-btn class="mx-3" dark icon>{{cart.show.total.cnt}}개 {{cart.show.total.price}}원 구매</v-btn>
 
     <v-dialog v-model="dialog.show">
       <v-layout align-center justify-center column fill-height>
-        <listProduct :show_items="cart.items"></listProduct>
+        <listProduct :show_items="cart.list" :obj="obj"></listProduct>
       </v-layout>
     </v-dialog>
   </v-footer>
@@ -32,6 +32,15 @@ export default {
     return {
       dialog: {
         show: false
+      },
+      obj: {
+        btn: {
+          name: "close",
+          fn: this.update
+        },
+        event: {
+          chg_option_group: this.chg_option_group
+        }
       }
     };
   },
@@ -39,7 +48,7 @@ export default {
     ...mapState({
       shop: state => state.shop.shop,
       products: state => state.shop.products,
-      cart: state => state.cart.show
+      cart: state => state.cart
     }),
     test() {}
   },
@@ -52,6 +61,27 @@ export default {
     fn_dialog(item) {
       this.dialog.show = true;
       console.log("dialog", item);
+    },
+    update(item) {
+      console.log("상품삭제", item);
+      this.$store.dispatch("cart/remove_product", item).then(res => {
+        this.$store.dispatch("cart/make_total", item).then(res => {
+          this.$store.dispatch("cart/show_simple_list", item).then();
+        });
+      });
+    },
+    chg_option_group(p_id, optg_id, params) {
+      var _params = {
+        p_id: p_id,
+        optg_id: optg_id,
+        option: params
+      };
+
+      this.$store.dispatch("cart/chg_option_group", _params).then(res => {
+        this.$store.dispatch("cart/make_total", _params).then(res => {
+          this.$store.dispatch("cart/show_simple_list", item).then();
+        });
+      });
     }
   }
 };

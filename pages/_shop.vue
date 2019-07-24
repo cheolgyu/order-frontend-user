@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <listProduct :show_items="products"></listProduct>
+    <listProduct :show_items="products" :obj="obj"></listProduct>
   </v-layout>
 </template>
 
@@ -16,7 +16,17 @@ export default {
     });
   },
   data() {
-    return {};
+    return {
+      obj: {
+        btn: {
+          name: "shopping_cart",
+          fn: this.btn_alert
+        },
+        event: {
+          chg_option_group: this.chg_option_group
+        }
+      }
+    };
   },
   computed: {
     ...mapState({
@@ -50,7 +60,11 @@ export default {
   methods: {
     btn_alert(item) {
       console.log("btn_alert", item);
-      this.$store.dispatch("cart/push", item).then(res => {});
+      this.$store.dispatch("cart/push", item).then(res => {
+        this.$store.dispatch("cart/make_total", item).then(res => {
+          this.$store.dispatch("cart/show_simple_list", item);
+        });
+      });
     },
     chg_option_group(p_id, optg_id, params) {
       var _params = {
