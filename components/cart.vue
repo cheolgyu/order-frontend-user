@@ -11,7 +11,12 @@
     </v-layout>
     <v-spacer></v-spacer>
 
-    <v-btn class="mx-3" dark icon>{{cart.show.total.cnt}}개 {{cart.show.total.price}}원 구매</v-btn>
+    <v-btn
+      class="mx-3"
+      dark
+      icon
+      @click="fn_buy(item)"
+    >{{cart.show.total.cnt}}개 {{cart.show.total.price}}원 구매</v-btn>
 
     <v-dialog v-model="dialog.show">
       <v-layout align-center justify-center column fill-height>
@@ -62,6 +67,10 @@ export default {
       this.dialog.show = true;
       console.log("dialog", item);
     },
+    fn_buy() {
+      console.log("fn_buy");
+    },
+
     update(item, idx) {
       console.log("상품삭제", item);
       this.$store.dispatch("cart/remove_product", idx).then(res => {
