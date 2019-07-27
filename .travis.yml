@@ -29,6 +29,8 @@ deploy:
     region: ap-northeast-2
     local_dir: dist
     skip_cleanup: true
+    env:
+     - VAR_CF_ID: $CF_ID_develop
     on:
       branch: master
   - provider: s3
@@ -38,8 +40,10 @@ deploy:
     region: ap-northeast-2
     local_dir: dist
     skip_cleanup: true
+    env:
+     - VAR_CF_ID: $CF_ID
     on:
       branch: develop
     
 after_deploy: 
-  - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_KEY -s $AWS_SECRET_KEY -c $CF_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST
+  - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_KEY -s $AWS_SECRET_KEY -c $VAR_CF_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST
