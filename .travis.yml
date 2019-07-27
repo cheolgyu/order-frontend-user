@@ -46,4 +46,5 @@ deploy:
       branch: develop
     
 after_deploy: 
+  - echo  $VAR_CF_ID
   - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_KEY -s $AWS_SECRET_KEY -c $VAR_CF_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST
