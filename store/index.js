@@ -10,7 +10,7 @@ export const mutations = {
       state.locale = locale
     }
   },
-  SET_SHOP(state, params) {
+  SET_SHOPS(state, params) {
     state.shops = params;
   },
 }
@@ -24,12 +24,11 @@ export const getters = {
 
 export const actions = {
   get_shops({ commit, rootState }, params) {
-    console.log("actions get_shops");
     return this.$axios
       .get("shops")
       .then(res => {
         if (res.status === 200) {
-          commit("SET_SHOPS", res.data.data);
+          commit("SET_SHOPS", res.data.data.shops);
           return res.state
         }
       });

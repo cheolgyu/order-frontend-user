@@ -1,7 +1,8 @@
 <template>
   <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>{{ $store.state.shops }}</v-flex>
-    <v-flex xs12 sm8 md6>{{ shops }}</v-flex>
+    <v-list>
+      <v-list-tile avatar v-for="item in shops" :key="item.id">{{item.name}}</v-list-tile>
+    </v-list>
   </v-layout>
 </template>
 
