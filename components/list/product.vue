@@ -11,7 +11,7 @@
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title v-text="product.name">{{product.name}}</v-list-item-title>
-              <v-list-item-subtitle v-text="product.price+' 원'"></v-list-item-subtitle>
+              <v-list-item-subtitle v-text="get_price_with_option(product)"></v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
               <!-- <v-list-item-action-text v-text="'상품기본가격: '+product.price+' 원'" /> -->
