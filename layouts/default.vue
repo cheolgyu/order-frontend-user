@@ -16,6 +16,13 @@
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title v-if="shop != null">{{shop.name}}</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <v-toolbar-items>
+        <v-btn icon ripple>
+          <v-icon color=" lighten-1">add_alert</v-icon>
+        </v-btn>
+      </v-toolbar-items>
     </v-app-bar>
 
     <v-content>
