@@ -1,25 +1,29 @@
 <template>
   <v-flex xs12 sm8 md6 round>
     <v-card>
-      <v-list>
+      <v-list shaped flat>
         <v-list-group v-for="(product,idx) in show_items" :key="idx" no-action>
+          <template v-slot:prependIcon>
+            <v-avatar color="light-blue darken-3" size="30">
+              <span class="white--text BOLD" v-text="product.name.charAt(0)"></span>
+            </v-avatar>
+          </template>
           <template v-slot:activator>
-            <v-list-item-action small>
-              <v-avatar color="light-blue darken-3">
-                <span class="white--text headline" v-text="product.name.charAt(0)"></span>
-              </v-avatar>
-            </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title v-text="product.name" />
+              <v-list-item-title v-text="product.name">{{product.name}}</v-list-item-title>
+              <v-list-item-subtitle v-text="product.price+' 원'"></v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
-              <v-list-item-action-text v-text="'상품기본가격: '+product.price+' 원'" />
-              <v-list-item-action-text>옵션적용가: {{get_price_with_option(product)}}</v-list-item-action-text>
-              <v-btn icon ripple @click.stop="obj.btn.fn(product,idx)">
+              <!-- <v-list-item-action-text v-text="'상품기본가격: '+product.price+' 원'" /> -->
+
+              <v-btn icon ripple @click.stop="obj.btn.fn(product,idx)" sm>
                 <v-icon color=" lighten-1">{{obj.btn.name}}</v-icon>
+                <!--<v-list-item-action-text>{{get_price_with_option(product)}}</v-list-item-action-text>  -->
               </v-btn>
             </v-list-item-action>
           </template>
+
+          <template v-slot:appendIcon></template>
           <v-list-item v-for="(option_group,idx2) in product.option_group_list" :key="idx+'_'+idx2">
             <v-list-item-content>
               <v-select
@@ -65,6 +69,11 @@
     </v-card>
   </v-flex>
 </template>
+<style >
+.v-list-group__header__append-icon {
+  display: none !important;
+}
+</style>
 
 <script>
 import { mapState, mapGetters } from "vuex";
