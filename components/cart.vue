@@ -49,11 +49,13 @@ export default {
       }
     };
   },
+  mounted() {},
   computed: {
     ...mapState({
       shop: state => state.shop.shop,
       products: state => state.shop.products,
-      cart: state => state.cart
+      cart: state => state.cart,
+      ws: state => state.ws
     }),
     test() {}
   },
@@ -69,6 +71,7 @@ export default {
     },
     fn_buy() {
       console.log("fn_buy");
+      this.$store.dispatch("ws/push", "1111");
     },
 
     update(item, idx) {

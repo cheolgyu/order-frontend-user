@@ -42,14 +42,16 @@
       </v-container>
     </v-content>
     <cart />
+    <ws />
   </v-app>
 </template>
 
 <script>
 import cart from "~/components/cart.vue";
+import ws from "~/components/ws.vue";
 import { mapState, mapGetters } from "vuex";
 export default {
-  components: { cart },
+  components: { cart, ws },
   props: {
     source: String
   },
@@ -76,6 +78,7 @@ export default {
   }),
   created() {
     this.$vuetify.theme.dark = true;
+    console.log("layout created");
   },
   computed: {
     ...mapState({
