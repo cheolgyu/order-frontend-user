@@ -1,5 +1,6 @@
 export const state = () => ({
     list: [],
+    list_state: '',
     show: {
         items: [],
         total: {

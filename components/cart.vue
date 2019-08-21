@@ -15,7 +15,7 @@
       class="mx-3"
       dark
       icon
-      @click="fn_buy(item)"
+      @click="fn_buy"
     >{{cart.show.total.cnt}}개 {{cart.show.total.price}}원 구매</v-btn>
 
     <v-dialog v-model="dialog.show">
@@ -71,7 +71,7 @@ export default {
     },
     fn_buy() {
       console.log("fn_buy");
-      this.$store.dispatch("ws/push", "1111");
+      this.$store.dispatch("ws/buy");
     },
 
     update(item, idx) {
