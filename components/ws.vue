@@ -10,7 +10,7 @@ export default {
   }),
   created() {
     console.log("ws.vue created");
-    this.conn();
+    //this.conn();
   },
   fetch({ store, params }) {},
   computed: {

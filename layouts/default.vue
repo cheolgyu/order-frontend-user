@@ -47,11 +47,13 @@
 </template>
 
 <script>
+import fb from "~/components/fb.vue";
 import cart from "~/components/cart.vue";
 import ws from "~/components/ws.vue";
 import { mapState, mapGetters } from "vuex";
+
 export default {
-  components: { cart, ws },
+  components: { cart, ws, fb },
   props: {
     source: String
   },
@@ -79,6 +81,7 @@ export default {
   created() {
     this.$vuetify.theme.dark = true;
     console.log("layout created");
+    console.log(this.$msg);
   },
   computed: {
     ...mapState({

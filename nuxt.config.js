@@ -4,6 +4,23 @@ import pkg from "./package";
 dotenv.config();
 
 export default {
+  /*
+  workbox: {
+    // Workbox options
+    importScripts: ['push-sw.js'],
+    dev: true,
+
+    config: {
+      debug: true
+    }
+  },
+   */
+  manifest: {
+    name: 'My test',
+    lang: 'ko',
+    gcm_sender_id: "371794845174"
+  },
+
   mode: 'spa',
   /*
   ** Headers of the page
@@ -39,6 +56,16 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    /*
+        {
+          src: '~/plugins/sw.js',
+          ssr: false
+        },
+        */
+    {
+      src: '~/plugins/firebase.js',
+      ssr: false
+    },
   ],
   /*
   ** Nuxt.js modules
