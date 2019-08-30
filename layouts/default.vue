@@ -7,7 +7,7 @@
             <v-icon>{{item.icon}}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>{{item.title}}</v-list-item-title>
+            <v-list-item-title>{{item.title}}111111111</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -80,8 +80,6 @@ export default {
   }),
   created() {
     this.$vuetify.theme.dark = true;
-    console.log("layout created");
-    console.log(this.$msg);
   },
   computed: {
     ...mapState({

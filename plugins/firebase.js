@@ -1,6 +1,11 @@
 
 import Vue from 'vue'
 
+
+
+var firebase = require("firebase/app");
+require("firebase/messaging");
+
 const firebaseConfig = {
     apiKey: "AIzaSyDeFOTllKAw1sHpK4OBFLOtmT4pFx5K3go",
     authDomain: "order-99f38.firebaseapp.com",
@@ -11,17 +16,15 @@ const firebaseConfig = {
     appId: "1:371794845174:web:f0a19ab33f3ed85c"
 };
 
-var firebase = require("firebase/app");
-require("firebase/messaging");
-require("firebase/auth");
+
+
 firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 const YOUR_PUBLIC_VAPID_KEY_HERE = "BFE1Zmtf2K7IAo7WpUinwGUxpRgIg-cVYMPjYCgHYo7zlIfpsaA3dokWNqwtK_vVIosdGuqjrRZEe6fAz27EgZ0";
 messaging.usePublicVapidKey(YOUR_PUBLIC_VAPID_KEY_HERE);
 
-console.log(firebase, messaging);
-Vue.prototype.$msg = messaging
+Vue.prototype.$fb_sw_token = null;
 
 let fb_registration = null;
 navigator.serviceWorker.register('/firebase-messaging-sw.js')
@@ -31,18 +34,14 @@ navigator.serviceWorker.register('/firebase-messaging-sw.js')
         return messaging.getToken();
     })
     .then((token) => {
+        Vue.prototype.$fb_sw_token = token;
         console.log('token::::::::::::::::::::. ', token);
     });
 
 
-// Handle incoming messages. Called when:
-// - a message is received while the app has focus
-// - the user clicks on an app notification created by a service worker
-//   `messaging.setBackgroundMessageHandler` handler.
 messaging.onMessage((payload) => {
     console.log('Message received. ', payload);
 
-    console.log('[firebase-messaging-sw.js] Received background message ', payload);
     // Customize notification here
     var notificationTitle = 'Background Message Title22222';
     var notificationOptions = {
@@ -54,8 +53,8 @@ messaging.onMessage((payload) => {
     fb_registration.showNotification(notificationTitle,
         notificationOptions);
 
-    // ...
 });
+
 
 
 

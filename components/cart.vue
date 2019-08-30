@@ -70,8 +70,7 @@ export default {
       console.log("dialog", item);
     },
     fn_buy() {
-      console.log("fn_buy");
-      this.$store.dispatch("ws/buy");
+      this.$store.dispatch("order/buy", this.$fb_sw_token);
     },
 
     update(item, idx) {

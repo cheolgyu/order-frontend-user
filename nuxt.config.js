@@ -4,21 +4,10 @@ import pkg from "./package";
 dotenv.config();
 
 export default {
-  /*
-  workbox: {
-    // Workbox options
-    importScripts: ['push-sw.js'],
-    dev: true,
-
-    config: {
-      debug: true
-    }
-  },
-   */
   manifest: {
-    name: 'My test',
+    name: process.env.npm_package_name,
     lang: 'ko',
-    gcm_sender_id: "371794845174"
+    gcm_sender_id: process.env.GCM_SENDER_ID
   },
 
   mode: 'spa',
