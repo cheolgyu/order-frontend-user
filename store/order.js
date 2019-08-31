@@ -11,7 +11,7 @@ export const actions = {
             state: "req",
             price: 0.0,
             products: list,
-            sw_token: { 'sw_token': sw_token }
+            sw_token: sw_token
         };
         this.$axios
             .put("/order", params)
