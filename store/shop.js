@@ -15,7 +15,6 @@ export const actions = {
         if (res.status === 200) {
           console.log("SET_SHOP", res.data.data);
           commit("SET_SHOP", res.data.data);
-          dispatch("ws/join", null, { root: true });
           return res.state
         }
       });
