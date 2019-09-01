@@ -42,18 +42,16 @@
       </v-container>
     </v-content>
     <cart />
-    <ws />
   </v-app>
 </template>
 
 <script>
 import fb from "~/components/fb.vue";
 import cart from "~/components/cart.vue";
-import ws from "~/components/ws.vue";
 import { mapState, mapGetters } from "vuex";
 
 export default {
-  components: { cart, ws, fb },
+  components: { cart, fb },
   props: {
     source: String
   },
