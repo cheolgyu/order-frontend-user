@@ -4,7 +4,6 @@
 export default {
   created() {
     let messaging = this.$msg;
-    console.log("+++++++++++++fb.vue", messaging);
 
     Notification.requestPermission().then(permission => {
       if (permission === "granted") {

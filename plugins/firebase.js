@@ -38,23 +38,18 @@ navigator.serviceWorker.register('/firebase-messaging-sw.js')
         console.log('token::::::::::::::::::::. ', token);
     });
 
-
 messaging.onMessage((payload) => {
     console.log('Message received. ', payload);
 
     // Customize notification here
-    var notificationTitle = 'Background Message Title22222';
-    var notificationOptions = {
-        body: '111111Background Message body22222.',
-        icon: '/firebase-logo.png'
-    };
+    var notificationTitle = payload.notification.title;
+    var notificationOptions = payload.notification;
 
 
     fb_registration.showNotification(notificationTitle,
         notificationOptions);
 
 });
-
 
 
 

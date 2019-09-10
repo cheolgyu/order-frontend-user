@@ -18,7 +18,7 @@ export const actions = {
         commit("MAKE_TOTAL", params);
     },
     chg_option_group({ commit, rootState }, params) {
-        commit("CHG_OPTION_GROUP", params)
+        commit("CART_CHG_OPTION_GROUP", params)
     },
     remove_product({ commit, rootState }, params) {
         commit("REMOVE_PRODUCT", params)
@@ -55,10 +55,13 @@ export const mutations = {
         state.show.total.price = price + options_price;
         state.show.total.cnt = state.list.length;
     },
-    CHG_OPTION_GROUP(state, params) {
+    CART_CHG_OPTION_GROUP(state, params) {
         var p = state.list[params.idx];
         var optg = p.option_group_list[params.idx2];
-        optg.default = params.option.id;
+        optg.select_opt_id = params.option.id;
+        optg.select_opt_name = params.option.name;
+        optg.select_opt_price = params.option.price;
+        console.log("[CART_옵션수정]", optg);
     },
     REMOVE_PRODUCT(state, idx) {
         state.list.splice(idx, 1);

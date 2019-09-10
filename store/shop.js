@@ -21,7 +21,7 @@ export const actions = {
 
   },
   chg_option_group({ commit, rootState }, params) {
-    commit("CHG_OPTION_GROUP", params)
+    commit("LIST_CHG_OPTION_GROUP", params)
   }
 };
 
@@ -31,14 +31,17 @@ export const mutations = {
     state.products.orgin = params.product;
     state.products.edit = params.product;
   },
-  CHG_OPTION_GROUP(state, params) {
+  LIST_CHG_OPTION_GROUP(state, params) {
     var p = state.products.edit.find(function (element) {
       return element.id == params.p_id;
     });
     var optg = p.option_group_list.find(function (element) {
       return element.id == params.optg_id;
     });
-    optg.default = params.option.id;
+    optg.select_opt_id = params.option.id;
+    optg.select_opt_name = params.option.name;
+    optg.select_opt_price = params.option.price;
+    console.log("[LIST_옵션수정]", optg);
   },
 
 };
