@@ -19,9 +19,9 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
-        <v-btn icon ripple>
-          <v-icon color=" lighten-1">add_alert</v-icon>
-          <!--
+        <notify />
+
+        <!--
 
             1. 친구가 선택한 물품 공유 해서 결재자 장바구니에 추가시키기
             1-1 현재 가게에 접속중이고 비슷 한 위치에 있는 사람들의 집합.
@@ -31,8 +31,7 @@
             
             2. 결제 는 방문 결제로 .. 이 사용자는 단골임으로 방문결제 허용 .
             
-          -->
-        </v-btn>
+        -->
       </v-toolbar-items>
     </v-app-bar>
 
@@ -48,10 +47,11 @@
 <script>
 import fb from "~/components/fb.vue";
 import cart from "~/components/cart.vue";
+import notify from "~/components/notify.vue";
 import { mapState, mapGetters } from "vuex";
 
 export default {
-  components: { cart, fb },
+  components: { cart, fb, notify },
   props: {
     source: String
   },
