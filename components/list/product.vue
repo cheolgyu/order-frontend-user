@@ -39,7 +39,7 @@
               >
                 <template
                   v-slot:item="{ item, index }"
-                >{{ item.name }} +{{ item.price }}원({{option_group.default}},{{item.id}})</template>
+                >{{ item.name }} +{{ item.price }}원 </template>
                 <template v-slot:selection="{ item, index }">
                   <v-layout column>
                     <v-flex m-5>

@@ -12,9 +12,8 @@
     <v-spacer></v-spacer>
 
     <v-btn
-      class="mx-3"
-      dark
-      icon
+      rounded
+      color="primary"
       @click="fn_buy"
     >{{cart.show.total.cnt}}개 {{cart.show.total.price}}원 구매</v-btn>
 
