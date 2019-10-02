@@ -37,9 +37,7 @@
                 rounded
                 return-object
               >
-                <template
-                  v-slot:item="{ item, index }"
-                >{{ item.name }} +{{ item.price }}원 </template>
+                <template v-slot:item="{ item, index }">{{ item.name }} +{{ item.price }}원</template>
                 <template v-slot:selection="{ item, index }">
                   <v-layout column>
                     <v-flex m-5>
@@ -102,11 +100,12 @@ export default {
   computed: {
     test() {},
     get_price_with_option(item) {
+      console.log("run get_price_with_option ", item);
       return item => {
         var option_value = 0;
         for (var i in item.option_group_list) {
           var option_group = item.option_group_list[i];
-          var opt_id = option_group.default;
+          var opt_id = option_group.select_opt_id;
           var opt = option_group.option_list.find(function(element) {
             return element.id == opt_id;
           });

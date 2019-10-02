@@ -8,7 +8,7 @@ export const actions = {
         var list = rootState.cart.list;
         var params = {
             shop_id: rootState.shop.shop.id,
-            state: "req",
+            state: 1,
             price: 0.0,
             products: list,
             sw_token: sw_token

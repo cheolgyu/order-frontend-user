@@ -71,6 +71,7 @@ export default {
         optg_id: optg_id,
         option: params
       };
+      console.log(" shop::chg_option_group ", _params);
 
       this.$store.dispatch("shop/chg_option_group", _params).then(res => {
         console.log(res);
