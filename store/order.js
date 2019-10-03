@@ -26,27 +26,15 @@ export const actions = {
             sw_token: sw_token
         };
 
-        var simple = list;
-
-        console.log("=============order sort =======================");
-        console.log(list);
-        console.log(simple);
-        var groupedPeople = groupBy(simple, 'id');
-        console.log(groupedPeople);
-
-        /*
-
         this.$axios
             .put("/order", params)
             .then(res => {
                 console.log(res);
                 if (res.status == 200) {
                     console.log(res);
-
                 } else {
                 }
             });
-            */
     },
 
 };
