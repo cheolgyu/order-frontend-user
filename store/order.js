@@ -13,6 +13,14 @@ export const actions = {
             products: list,
             sw_token: sw_token
         };
+
+        var simple = list;
+
+        console.log("=============order sort =======================");
+        console.log(list);
+        console.log(simple);
+        /*
+
         this.$axios
             .put("/order", params)
             .then(res => {
@@ -23,6 +31,7 @@ export const actions = {
                 } else {
                 }
             });
+            */
     },
 
 };

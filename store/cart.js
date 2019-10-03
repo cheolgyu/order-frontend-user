@@ -1,6 +1,6 @@
 export const state = () => ({
     list: [],
-    list_state: '',
+    list2: [],
     show: {
         items: [],
         total: {
@@ -30,7 +30,24 @@ export const actions = {
 
 export const mutations = {
     PUSH(state, params) {
+
         state.list.push(params);
+
+        var if_p = state.list2.find(function (element) {
+            return element.id == params.id;
+        });
+
+        if (if_p === undefined) {
+            let p = {
+                id: params.id,
+                list: []
+            }
+            p.list.push(params);
+            state.list2.push(p);
+        } else {
+            if_p.list.push(params);
+        }
+
     },
     MAKE_TOTAL(state, params) {
         //
