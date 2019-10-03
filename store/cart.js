@@ -32,7 +32,7 @@ export const mutations = {
     PUSH(state, params) {
 
         state.list.push(params);
-
+        /*
         var if_p = state.list2.find(function (element) {
             return element.id == params.id;
         });
@@ -47,6 +47,7 @@ export const mutations = {
         } else {
             if_p.list.push(params);
         }
+        */
 
     },
     MAKE_TOTAL(state, params) {

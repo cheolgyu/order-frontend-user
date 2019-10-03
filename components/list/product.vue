@@ -89,6 +89,12 @@ const props = {
 export default {
   props,
   components: {},
+  watch: {
+    show_items: {
+      deep: true,
+      handler: "optg_update"
+    }
+  },
   fetch({ store, params }) {
     store.dispatch("shop/get", params.shop).then(res => {
       console.log(res);
@@ -100,7 +106,7 @@ export default {
   computed: {
     test() {},
     get_price_with_option(item) {
-      console.log("run get_price_with_option ", item);
+      console.log(" 11 run get_price_with_option ", item);
       return item => {
         var option_value = 0;
         for (var i in item.option_group_list) {
@@ -122,6 +128,17 @@ export default {
     //this.init();
   },
 
-  methods: {}
+  methods: {
+    // Fetch data about the movie
+    optg_update(val, oldVal) {
+      console.log("optg update", val, oldVal);
+      let changed = val.filter(function(p, idx) {
+        return Object.keys(p).some(function(prop) {
+          return p[prop] !== oldVal[idx][prop];
+        });
+      });
+      console.log(changed);
+    }
+  }
 };
 </script>

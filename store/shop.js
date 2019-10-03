@@ -6,6 +6,19 @@ export const state = () => ({
   }
 });
 
+var product = {
+  id: 1
+};
+var option_group = {};
+var option = {};
+
+function replacer(key, value) {
+  if (typeof value === "string") {
+    return undefined;
+  }
+  return value;
+}
+
 export const actions = {
   get({ commit, rootState, dispatch }, params) {
     console.log("11", params);
@@ -28,8 +41,12 @@ export const actions = {
 export const mutations = {
   SET_SHOP(state, params) {
     state.shop = params.shop;
+    console.log("----------------------------SET_SHOP-------------------------------------------------");
+    console.log(typeof params.product[0].option_group_list, params.product[0].option_group_list);
     state.products.orgin = params.product;
     state.products.edit = params.product;
+
+
   },
   LIST_CHG_OPTION_GROUP(state, params) {
     var p = state.products.edit.find(function (element) {

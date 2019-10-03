@@ -2,6 +2,18 @@ export const state = () => ({
     ws_conn: null
 });
 
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+function groupBy(objectArray, property) {
+    return objectArray.reduce(function (acc, obj) {
+        var key = obj[property];
+        if (!acc[key]) {
+            acc[key] = [];
+        }
+        acc[key].push(obj);
+        return acc;
+    }, {});
+}
+
 export const actions = {
 
     buy({ commit, rootState }, sw_token) {
@@ -19,6 +31,9 @@ export const actions = {
         console.log("=============order sort =======================");
         console.log(list);
         console.log(simple);
+        var groupedPeople = groupBy(simple, 'id');
+        console.log(groupedPeople);
+
         /*
 
         this.$axios
