@@ -16,25 +16,28 @@ function groupBy(objectArray, property) {
 
 export const actions = {
 
-    buy({ commit, rootState }, sw_token) {
+    buy({ commit, rootState, dispatch }, sw_token) {
         var list = rootState.cart.list;
-        var params = {
-            shop_id: rootState.shop.shop.id,
-            state: 1,
-            price: 0.0,
-            products: list,
-            sw_token: sw_token
-        };
 
-        this.$axios
-            .put("/order", params)
-            .then(res => {
-                console.log(res);
-                if (res.status == 200) {
-                    console.log(res);
-                } else {
-                }
-            });
+
+          var params = {
+              shop_id: rootState.shop.shop.id,
+              state: 1,
+              price: rootState.cart.show.total.price,
+              cnt: rootState.cart.show.total.cnt,
+              products: groupBy(list,'id'),
+              sw_token: sw_token
+          };
+          this.$axios
+              .put("/order", params)
+              .then(res => {
+                  console.log(res);
+                  if (res.status == 200) {
+                      console.log(res);
+                  } else {
+                  }
+              });
+
     },
 
 };
