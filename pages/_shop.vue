@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <listProduct :show_items="products" :obj="obj"></listProduct>
+    <listProduct :items="products" :obj="obj"></listProduct>
   </v-layout>
 </template>
 
@@ -10,10 +10,8 @@ import listProduct from "~/components/list/product.vue";
 
 export default {
   components: { listProduct },
-  fetch({ store, params }) {
-    store.dispatch("shop/get", params.shop).then(res => {
-      console.log(res);
-    });
+  async fetch({ store, params }) {
+    await store.dispatch("shop/info", params.shop).then(res => {});
   },
   data() {
     return {
@@ -30,8 +28,9 @@ export default {
   },
   computed: {
     ...mapState({
-      shop: state => state.shop.shop,
-      products: state => state.shop.products.edit,
+      products: state => {
+        return state.shop.s_info.p;
+      },
       cart: state => state.list
     }),
     test() {},

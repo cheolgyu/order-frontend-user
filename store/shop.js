@@ -1,37 +1,18 @@
 export const state = () => ({
-  shop: null,
+  s_info: null,
   products: {
-    orgin: null,
     edit: null
   }
 });
 
-var product = {
-  id: 1
-};
-var option_group = {};
-var option = {};
-
-function replacer(key, value) {
-  if (typeof value === "string") {
-    return undefined;
-  }
-  return value;
-}
-
 export const actions = {
-  get({ commit, rootState, dispatch }, params) {
-    console.log("11", params);
-    return this.$axios
-      .get(params)
-      .then(res => {
-        if (res.status === 200) {
-          console.log("SET_SHOP", res.data.data);
-          commit("SET_SHOP", res.data.data);
-          return res.state
-        }
-      });
-
+  async  info({ commit, rootState, dispatch }, params) {
+    console.log(" shop.js =====>info");
+    let { data } = await this.$axios.get(params);
+    console.log(" shop.js =====>info", data);
+    if (data.status === 200) {
+      commit("SET_SHOP", data.data.shop_info.s_info);
+    }
   },
   chg_option_group({ commit, rootState }, params) {
     commit("LIST_CHG_OPTION_GROUP", params)
@@ -40,25 +21,10 @@ export const actions = {
 
 export const mutations = {
   SET_SHOP(state, params) {
-    state.shop = params.shop;
-    console.log("----------------------------SET_SHOP-------------------------------------------------");
-    console.log(typeof params.product[0].option_group_list, params.product[0].option_group_list);
-    state.products.orgin = params.product;
-    state.products.edit = params.product;
-
-
+    state.s_info = params;
   },
   LIST_CHG_OPTION_GROUP(state, params) {
-    var p = state.products.edit.find(function (element) {
-      return element.id == params.p_id;
-    });
-    var optg = p.option_group_list.find(function (element) {
-      return element.id == params.optg_id;
-    });
-    optg.select_opt_id = params.option.id;
-    optg.select_opt_name = params.option.name;
-    optg.select_opt_price = params.option.price;
-    console.log("[LIST_옵션수정]", optg);
+
   },
 
 };
