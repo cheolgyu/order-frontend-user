@@ -95,7 +95,7 @@ export default {
   computed: {
     test() {},
     get_price_with_option(item) {
-      console.log(" 11 run get_price_with_option ", item);
+      
       return item => {
         var option_value = 0;
         for (var i in item.option_group_list) {
@@ -113,7 +113,7 @@ export default {
     }
   },
   mounted() {
-    console.log("p.vue ", this.items);
+    
     //this.init();
   },
 

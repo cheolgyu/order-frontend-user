@@ -60,20 +60,20 @@ export default {
   },
   fetch({ store, params }) {
     store.dispatch("shop/get", params.shop).then(res => {
-      console.log(res);
+     
     });
   },
   methods: {
     fn_dialog(item) {
       this.dialog.show = true;
-      console.log("dialog", item);
+      
     },
     fn_buy() {
       this.$store.dispatch("order/buy", this.$fb_sw_token);
     },
 
     update(item, idx) {
-      console.log("상품삭제", item);
+      
       this.$store.dispatch("cart/remove_product", idx).then(res => {
         this.$store.dispatch("cart/make_total", item).then(res => {
           this.$store.dispatch("cart/show_simple_list", item).then();

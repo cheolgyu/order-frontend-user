@@ -21,10 +21,10 @@ function urlB64ToUint8Array(base64String) {
 }
 
 
-console.log("1111111111111111111111111111111111111");
-console.log("Hooking on service worker registration life cycle");
-console.log("1111111111111111111111111111111111111");
-console.log("plugins/sw.js===========================");
+
+
+
+
 
 let isSubscribed = null;
 if ('serviceWorker' in navigator) {
@@ -33,17 +33,17 @@ if ('serviceWorker' in navigator) {
             let swRegistration = worker;
 
 
-            console.log("plugins/sw.js===========================", swRegistration);
-            console.log("22222222222222222222222222222222")
+            
+            
 
             swRegistration.pushManager.getSubscription()
                 .then(function (subscription) {
                     isSubscribed = !(subscription === null);
 
                     if (isSubscribed) {
-                        console.log('User IS subscribed.');
+                        
                     } else {
-                        console.log('User is NOT subscribed.');
+                        
                     }
                 });
 
@@ -59,7 +59,7 @@ function subscribeUser() {
         applicationServerKey: applicationServerKey
     })
         .then(function (subscription) {
-            console.log('User is subscribed:', subscription);
+            
 
             updateSubscriptionOnServer(subscription);
 
@@ -68,7 +68,7 @@ function subscribeUser() {
             updateBtn();
         })
         .catch(function (err) {
-            console.log('Failed to subscribe the user: ', err);
+            
             updateBtn();
         });
 }

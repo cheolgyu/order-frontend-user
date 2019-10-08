@@ -52,7 +52,7 @@ export const mutations = {
     },
     MAKE_TOTAL(state, params) {
         //
-        console.log("총상품가격 만들기")
+        
         var price = 0;
         var options_price = 0;
         for (var i in state.list) {
@@ -79,7 +79,7 @@ export const mutations = {
         optg.select_opt_id = params.option.id;
         optg.select_opt_name = params.option.name;
         optg.select_opt_price = params.option.price;
-        console.log("[CART_옵션수정]", optg);
+        
     },
     REMOVE_PRODUCT(state, idx) {
         state.list.splice(idx, 1);
@@ -105,7 +105,7 @@ export const mutations = {
 
         }
         state.show.items = show;
-        console.log("show", show)
+        
 
     },
 

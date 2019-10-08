@@ -35,7 +35,7 @@ export default {
     }),
     test() {},
     get_price_with_option(item) {
-      console.log(" 22 run get_price_with_option ", item);
+      
       return item => {
         var option_value = 0;
         for (var i in item.option_group_list) {
@@ -53,12 +53,12 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$route.params.shop);
+    
   },
 
   methods: {
     btn_alert(item) {
-      console.log("btn_alert", item);
+      
       this.$store.dispatch("cart/push", item).then(res => {
         this.$store.dispatch("cart/make_total", item).then(res => {
           this.$store.dispatch("cart/show_simple_list", item);
@@ -71,10 +71,10 @@ export default {
         optg_id: optg_id,
         option: params
       };
-      console.log(" shop::chg_option_group ", _params);
+      
 
       this.$store.dispatch("shop/chg_option_group", _params).then(res => {
-        console.log(res);
+       
       });
     }
   }

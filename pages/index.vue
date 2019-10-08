@@ -28,8 +28,8 @@ export default {
   }),
   fetch({ store, params }) {
     store.dispatch("get_shops", params).then(res => {
-      console.log("fetch then");
-      console.log(res);
+      
+     
     });
   },
   methods: {
@@ -57,7 +57,7 @@ export default {
         })
       })
         .then(function(response) {
-          console.log(response);
+          
         })
         .catch(function(error) {
           console.error(error);

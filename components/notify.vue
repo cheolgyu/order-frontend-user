@@ -71,7 +71,7 @@ export default {
     },
     init() {
       this.notify = this.permission();
-      console.log("init:", this.notify);
+      
       this.notify_icon();
     },
     notify_icon() {
@@ -87,7 +87,7 @@ export default {
     },
     btn_notify: function(event) {
       let check = this.permission();
-      console.log("btn_notify", check);
+      
       if (check == "granted") {
         // alert("알림표시가 허용됬습니다.");
       } else if (check == "denied") {
