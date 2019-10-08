@@ -7,9 +7,7 @@ export const state = () => ({
 
 export const actions = {
   async  info({ commit, rootState, dispatch }, params) {
-    console.log(" shop.js =====>info");
     let { data } = await this.$axios.get(params);
-    console.log(" shop.js =====>info", data);
     if (data.status === 200) {
       commit("SET_SHOP", data.data.shop_info.s_info);
     }
