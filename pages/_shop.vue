@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <listProduct :items="products" :obj="obj"></listProduct>
+    <listProduct list_type="shop" :list="list" :obj="obj"></listProduct>
   </v-layout>
 </template>
 
@@ -19,37 +19,15 @@ export default {
         btn: {
           name: "shopping_cart",
           fn: this.btn_alert
-        },
-        event: {
-          chg_option_group: this.chg_option_group
         }
       }
     };
   },
   computed: {
     ...mapState({
-      products: state => {
-        return JSON.parse(JSON.stringify(state.shop.s_info.p));
-      },
+      list: state => state.product.list,
       cart: state => state.list
-    }),
-    test() {},
-    get_price_with_option(item) {
-      return item => {
-        var option_value = 0;
-        for (var i in item.option_group_list) {
-          var option_group = item.option_group_list[i];
-          var opt_id = option_group.default;
-          var opt = option_group.option_list.find(function(element) {
-            return element.id == opt_id;
-          });
-
-          option_value += opt.price;
-        }
-
-        return item.price + option_value + "원";
-      };
-    }
+    })
   },
   mounted() {},
 

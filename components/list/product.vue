@@ -74,10 +74,8 @@
 </style>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-
 const props = {
-  items: {
+  list: {
     type: Array,
     default: () => ({})
   },
@@ -90,55 +88,32 @@ export default {
   props,
   components: {},
   data() {
-    return {
-      list: this.items //JSON.parse(JSON.stringify(this.items))
-    };
+    return {};
   },
-  watch: {
-    list: {
-      handler: function(val, oldVal) {
-        //카트일경우
-        // 1. 카트일 경우 에만 상품들의 총 가격 업데이트 기능
-        // 2. 카트의 총합 ui 는/은 카트 총합 model 에서 불러오게 수정.
+  watch: {},
 
-        console.log("new: %s, old: %s", val, oldVal);
-      },
-      deep: true
-    }
-  },
-  computed: {
-    test() {},
-    get_price_with_option(item) {
-      return item.select_p_price + "원";
-    }
-  },
-  mounted() {
-    //this.init();
-  },
+  computed: {},
+  mounted() {},
 
   methods: {
-    // Fetch data about the movie
     update_price() {},
     update_og(p_id, og, o) {
-      og.select_opt_id = o.o_id;
-      og.select_opt_name = o.o_nm;
-      og.select_opt_price = o.o_price;
-      var p_obj = this.list.find(el => el.p_id == p_id);
-      var og_obj = p_obj.og.find(el => el.og_id == og.p_id);
+      this.$store
+        .dispatch(
+          "product/update_og",
+          {
+            list: this.list,
+            p_id: p_id,
+            og: og,
+            o: o
+          },
+          { root: true }
+        )
+        .then(res => {});
+    },
 
-      this.update_total_og_price(p_obj);
-    },
-    update_total_og_price(p_obj) {
-      var total_og_price = 0;
-      for (var i in p_obj.og) {
-        total_og_price = total_og_price + p_obj.og[i].select_opt_price;
-      }
-      p_obj.total_og_price = total_og_price;
-      p_obj.total_p_price = p_obj.p_price + p_obj.total_og_price;
-      return p_obj.total_p_price;
-    },
     get_p_price(p_obj) {
-      return this.update_total_og_price(p_obj) + " 원";
+      return p_obj.total_p_price + " 원";
     }
   }
 };

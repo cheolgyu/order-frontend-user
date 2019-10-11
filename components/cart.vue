@@ -19,7 +19,7 @@
 
     <v-dialog v-model="dialog.show">
       <v-layout align-center justify-center column fill-height>
-        <listProduct :items="items" :obj="obj"></listProduct>
+        <listProduct :items="cart_list" :obj="obj"></listProduct>
       </v-layout>
     </v-dialog>
   </v-footer>
@@ -45,15 +45,14 @@ export default {
         event: {
           chg_option_group: this.chg_option_group
         }
-      },
-      items: JSON.parse(JSON.stringify(this.cart.list))
+      }
     };
   },
   mounted() {},
   computed: {
     ...mapState({
       shop: state => state.shop.shop,
-      products: state => state.shop.products,
+      cart_list: state => state.product.cart_list,
       cart: state => state.cart,
       ws: state => state.ws
     }),
