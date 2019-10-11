@@ -1,8 +1,6 @@
 export const state = () => ({
-  s_info: null,
-  products: {
-    edit: null
-  }
+  s_id: null,
+  s_nm: null,
 });
 
 export const actions = {
@@ -20,7 +18,8 @@ export const actions = {
 
 export const mutations = {
   SET_SHOP(state, params) {
-    state.s_info = params;
+    state.s_id = params.s_id;
+    state.s_nm = params.s_nm;
   },
   LIST_CHG_OPTION_GROUP(state, params) {
 
