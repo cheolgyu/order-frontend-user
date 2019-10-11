@@ -15,7 +15,7 @@
 
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title v-if="shop != null">{{shop.name}}</v-toolbar-title>
+      <v-toolbar-title v-if="shop != null">{{shop.s_nm}}</v-toolbar-title>
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
@@ -81,9 +81,7 @@ export default {
   },
   computed: {
     ...mapState({
-      shop: state => state.shop.shop,
-      products: state => state.shop.products,
-      cart: state => state.list
+      shop: state => state.shop
     }),
     test() {}
   }
