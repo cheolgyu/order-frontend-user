@@ -2,10 +2,10 @@
 <template>
   <v-footer app dark height="auto" fixed>
     <v-layout align-center justify-start row fill-height>
-      <v-badge right overlap color="orange" :key="item.id" v-for="item in cart.show.items">
+      <v-badge right overlap color="orange" :key="item.id" v-for="item in cart_display.items">
         <template v-slot:badge>{{item.cnt}}</template>
         <v-avatar color="light-blue darken-3" @click="fn_dialog(item)">
-          <span class="white--text headline">{{ item.name }}</span>
+          <span class="white--text headline">{{ item.p_nm.charAt(0) }}</span>
         </v-avatar>
       </v-badge>
     </v-layout>
@@ -15,11 +15,11 @@
       rounded
       color="primary"
       @click="fn_buy"
-    >{{cart.show.total.cnt}}개 {{cart.show.total.price}}원 구매</v-btn>
+    >{{cart_display.total.cnt}}개 {{cart_display.total.price}}원 구매</v-btn>
 
     <v-dialog v-model="dialog.show">
       <v-layout align-center justify-center column fill-height>
-        <listProduct :items="cart_list" :obj="obj"></listProduct>
+        <listProduct :list="cart_list" :obj="obj"></listProduct>
       </v-layout>
     </v-dialog>
   </v-footer>
@@ -41,18 +41,25 @@ export default {
         btn: {
           name: "close",
           fn: this.update
-        },
-        event: {
-          chg_option_group: this.chg_option_group
         }
       }
     };
   },
   mounted() {},
+  watch: {
+    cart_list: {
+      handler: function() {
+        //When each event is needed after the common option modification function
+        this.$store.dispatch("product/cart_update", null);
+      },
+      deep: true
+    }
+  },
   computed: {
     ...mapState({
       shop: state => state.shop.shop,
       cart_list: state => state.product.cart_list,
+      cart_display: state => state.product.cart_display,
       cart: state => state.cart,
       ws: state => state.ws
     }),
@@ -70,26 +77,7 @@ export default {
     },
 
     update(item, idx) {
-      this.$store.dispatch("cart/remove_product", idx).then(res => {
-        this.$store.dispatch("cart/make_total", item).then(res => {
-          this.$store.dispatch("cart/show_simple_list", item).then();
-        });
-      });
-    },
-    chg_option_group(p_id, optg_id, params, idx, idx2) {
-      var _params = {
-        p_id: p_id,
-        optg_id: optg_id,
-        option: params,
-        idx: idx,
-        idx2: idx2
-      };
-
-      this.$store.dispatch("cart/chg_option_group", _params).then(res => {
-        this.$store.dispatch("cart/make_total", _params).then(res => {
-          this.$store.dispatch("cart/show_simple_list", _params).then();
-        });
-      });
+      this.$store.dispatch("product/cart_item_remove", idx).then(res => {});
     }
   }
 };

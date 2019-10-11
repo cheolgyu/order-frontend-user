@@ -100,7 +100,7 @@ export default {
     update_og(p_id, og, o) {
       this.$store
         .dispatch(
-          "product/update_og",
+          "product/comm_update_og",
           {
             list: this.list,
             p_id: p_id,

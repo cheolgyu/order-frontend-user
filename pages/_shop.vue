@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <listProduct list_type="shop" :list="list" :obj="obj"></listProduct>
+    <listProduct :list="list" :obj="obj"></listProduct>
   </v-layout>
 </template>
 
@@ -30,23 +30,15 @@ export default {
     })
   },
   mounted() {},
-
+  watch: {
+    list: {
+      handler: function() {},
+      deep: true
+    }
+  },
   methods: {
     btn_alert(item) {
-      this.$store.dispatch("cart/push", item).then(res => {
-        this.$store.dispatch("cart/make_total", item).then(res => {
-          this.$store.dispatch("cart/show_simple_list", item);
-        });
-      });
-    },
-    chg_option_group(p_id, optg_id, params) {
-      var _params = {
-        p_id: p_id,
-        optg_id: optg_id,
-        option: params
-      };
-
-      this.$store.dispatch("shop/chg_option_group", _params).then(res => {});
+      this.$store.dispatch("product/cart_item_push", item).then(res => {});
     }
   }
 };
