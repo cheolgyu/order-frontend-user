@@ -5,7 +5,7 @@
       <v-badge right overlap color="orange" :key="item.id" v-for="item in cart.show.items">
         <template v-slot:badge>{{item.cnt}}</template>
         <v-avatar color="light-blue darken-3" @click="fn_dialog(item)">
-          <span class="white--text headline">{{ item.name.charAt(0) }}</span>
+          <span class="white--text headline">{{ item.name }}</span>
         </v-avatar>
       </v-badge>
     </v-layout>
@@ -19,7 +19,7 @@
 
     <v-dialog v-model="dialog.show">
       <v-layout align-center justify-center column fill-height>
-        <listProduct :show_items="cart.list" :obj="obj"></listProduct>
+        <listProduct :items="items" :obj="obj"></listProduct>
       </v-layout>
     </v-dialog>
   </v-footer>
@@ -45,7 +45,8 @@ export default {
         event: {
           chg_option_group: this.chg_option_group
         }
-      }
+      },
+      items: JSON.parse(JSON.stringify(this.cart.list))
     };
   },
   mounted() {},
@@ -59,21 +60,17 @@ export default {
     test() {}
   },
   fetch({ store, params }) {
-    store.dispatch("shop/get", params.shop).then(res => {
-     
-    });
+    store.dispatch("shop/get", params.shop).then(res => {});
   },
   methods: {
     fn_dialog(item) {
       this.dialog.show = true;
-      
     },
     fn_buy() {
       this.$store.dispatch("order/buy", this.$fb_sw_token);
     },
 
     update(item, idx) {
-      
       this.$store.dispatch("cart/remove_product", idx).then(res => {
         this.$store.dispatch("cart/make_total", item).then(res => {
           this.$store.dispatch("cart/show_simple_list", item).then();

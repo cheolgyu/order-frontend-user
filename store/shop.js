@@ -9,7 +9,8 @@ export const actions = {
   async  info({ commit, rootState, dispatch }, params) {
     let { data } = await this.$axios.get(params);
     if (data.status === 200) {
-      commit("SET_SHOP", data.data.shop_info.s_info);
+      //commit("SET_SHOP", data.data.shop_info.s_info);
+      dispatch("product/set_list", data.data.shop_info.s_info, { root: true });
     }
   },
   chg_option_group({ commit, rootState }, params) {

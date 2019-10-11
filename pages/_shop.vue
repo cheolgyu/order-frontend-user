@@ -29,13 +29,12 @@ export default {
   computed: {
     ...mapState({
       products: state => {
-        return state.shop.s_info.p;
+        return JSON.parse(JSON.stringify(state.shop.s_info.p));
       },
       cart: state => state.list
     }),
     test() {},
     get_price_with_option(item) {
-      
       return item => {
         var option_value = 0;
         for (var i in item.option_group_list) {
@@ -52,13 +51,10 @@ export default {
       };
     }
   },
-  mounted() {
-    
-  },
+  mounted() {},
 
   methods: {
     btn_alert(item) {
-      
       this.$store.dispatch("cart/push", item).then(res => {
         this.$store.dispatch("cart/make_total", item).then(res => {
           this.$store.dispatch("cart/show_simple_list", item);
@@ -71,11 +67,8 @@ export default {
         optg_id: optg_id,
         option: params
       };
-      
 
-      this.$store.dispatch("shop/chg_option_group", _params).then(res => {
-       
-      });
+      this.$store.dispatch("shop/chg_option_group", _params).then(res => {});
     }
   }
 };
