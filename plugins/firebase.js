@@ -35,15 +35,17 @@ navigator.serviceWorker.register('/firebase-messaging-sw.js')
     })
     .then((token) => {
         Vue.prototype.$fb_sw_token = token;
-        
+
     });
 
 messaging.onMessage((payload) => {
-    
+
 
     // Customize notification here
-    var notificationTitle = payload.notification.title;
-    var notificationOptions = payload.notification;
+    var notificationTitle = payload.data.title;
+    var obj = JSON.parse(payload.data.my_options);
+    var notificationOptions = obj;
+    console.log("onMessage:", payload, notificationOptions);
 
 
     fb_registration.showNotification(notificationTitle,
