@@ -19,10 +19,14 @@ export default {
   },
   methods: {
     install() {
-      installEvent.prompt();
-      installEvent.userChoice.then(() => {
-        // promptEvent = null;
-      });
+      if (installEvent != null) {
+        installEvent.prompt();
+        installEvent.userChoice.then(() => {
+          // promptEvent = null;
+        });
+      } else {
+        console.log("installEvent is null", installEvent);
+      }
     }
   }
 };
