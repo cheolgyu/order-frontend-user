@@ -5,9 +5,13 @@ dotenv.config();
 
 export default {
   manifest: {
+    background_color: "purple",
+    description: "Shows random fox pictures. Hey, at least it isn't cats.",
+    display: "fullscreen",
+
     name: process.env.npm_package_name,
-    lang: 'ko',
-    gcm_sender_id: process.env.GCM_SENDER_ID
+    short_name: process.env.npm_package_name,
+    start_url: "/index",
   },
 
   mode: 'spa',

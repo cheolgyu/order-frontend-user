@@ -83,6 +83,6 @@ dist
 
 # Service worker
 /static/sw.js
-
+sw.*
 # Mac OSX
 .DS_Store

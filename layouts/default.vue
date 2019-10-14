@@ -19,6 +19,7 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
+        <install-prompt />
         <notify />
 
         <!--
@@ -48,10 +49,11 @@
 import fb from "~/components/fb.vue";
 import cart from "~/components/cart.vue";
 import notify from "~/components/notify.vue";
+import InstallPrompt from "~/components/InstallPrompt.vue";
 import { mapState, mapGetters } from "vuex";
 
 export default {
-  components: { cart, fb, notify },
+  components: { cart, fb, notify, InstallPrompt },
   props: {
     source: String
   },
