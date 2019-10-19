@@ -8,7 +8,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt --spa start",
-    "generate": "nuxt generate"
+    "generate": "NODE_ENV=production nuxt generate "
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
@@ -22,8 +22,12 @@
     "vue-i18n": "^8.13.0"
   },
   "devDependencies": {
+    "concurrent-transform": "^1.0.0",
+    "gulp": "^4.0.2",
+    "gulp-awspublish": "^4.0.0",
+    "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
+    "nodemon": "^1.18.9",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
-    "nodemon": "^1.18.9"
+    "stylus-loader": "^3.0.2"
   }
 }

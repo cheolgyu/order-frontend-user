@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
-import dotenv from "dotenv";
+const envPath = `./.env.${process.env.NODE_ENV || 'local'}`
+require('dotenv').config({ path: envPath })
 import pkg from "./package";
-dotenv.config();
 
 export default {
   manifest: {
@@ -67,8 +67,12 @@ export default {
     '@nuxtjs/vuetify',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    '@nuxtjs/pwa', ,
+    '@nuxtjs/dotenv'
   ],
+  dotenv: {
+    filename: envPath
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
