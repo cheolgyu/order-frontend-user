@@ -74,6 +74,16 @@ export default {
         icon: "dashboard",
         title: "로그인",
         to: "/login"
+      },
+      {
+        icon: "settings",
+        title: "이용약관",
+        to: "/terms"
+      },
+      {
+        icon: "dashboard",
+        title: "개인정보방침",
+        to: "/privacy"
       }
     ],
     title: "사용자"
