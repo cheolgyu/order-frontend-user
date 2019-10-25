@@ -19,6 +19,7 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
+        <btn_user />
         <install-prompt />
         <notify />
 
@@ -49,11 +50,12 @@
 import fb from "~/components/fb.vue";
 import cart from "~/components/cart.vue";
 import notify from "~/components/notify.vue";
+import btn_user from "~/components/btn/user.vue";
 import InstallPrompt from "~/components/InstallPrompt.vue";
 import { mapState, mapGetters } from "vuex";
 
 export default {
-  components: { cart, fb, notify, InstallPrompt },
+  components: { cart, fb, notify, InstallPrompt, btn_user },
   props: {
     source: String
   },
@@ -89,13 +91,19 @@ export default {
     title: "사용자"
   }),
   created() {
+    console.log(this.$store);
     this.$vuetify.theme.dark = true;
   },
   computed: {
     ...mapState({
-      shop: state => state.shop
+      shop: state => state.shop,
+      user: state => state.user
+    }),
+    ...mapGetters({
+      user_type: "user/user_type"
     }),
     test() {}
-  }
+  },
+  methods: {}
 };
 </script>

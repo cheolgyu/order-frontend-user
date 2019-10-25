@@ -3,50 +3,49 @@
     <div>
       <div id="kakao-login-btn"></div>
     </div>
-    <a href="#" @click="signOut">google Sign out</a>
   </div>
 </template>
  
  <script>
 export default {
   mounted() {
-    this.go();
+    this.go2();
   },
   created() {},
   methods: {
-    go() {
-      if (window.Kakao != undefined) {
+    go2() {
+      if (!window.Kakao.isInitialized()) {
         window.Kakao.init("d2d9de95761c8199102ae1b822359fe4");
-        // 카카오 로그인 버튼을 생성합니다.
-        window.Kakao.Auth.createLoginButton({
-          container: "#kakao-login-btn",
-          success: function(authObj) {
-            // 로그인 성공시, API를 호출합니다.
-            Kakao.API.request({
-              url: "/v2/user/me",
-              success: function(res) {
-                alert(JSON.stringify(res));
-              },
-              fail: function(error) {
-                alert(JSON.stringify(error));
-              }
-            });
-          },
-          fail: function(err) {
-            alert(JSON.stringify(err));
-          }
-        });
-      } else {
-        console.log("btn initial err", window.Kakao);
       }
-    },
-    signOut() {
-      window.Kakao.Auth.logout(function(obj) {
-        console.log("window.Kakao.Auth.logout:", obj);
-        if (obj == true) {
-        } else {
+
+      window.Kakao.Auth.createLoginButton({
+        container: "#kakao-login-btn",
+        scope: "account_email",
+        success: function(authObj) {
+          var res = Kakao.API.request({
+            url: "/v2/user/me",
+            success: function(resp) {
+              console.log(resp);
+              var user = {
+                type: "kakao",
+                id: resp.id,
+                name: resp.kakao_account.profile.nickname,
+                img: resp.kakao_account.profile.thumbnail_image_url,
+                email: resp.kakao_account.email
+              };
+              window.$nuxt.$store
+                .dispatch("user/in", user, { root: true })
+                .then(res => {});
+            },
+
+            fail: function(error) {
+              alert(JSON.stringify(error));
+            }
+          });
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
         }
-        // location.href = "로그아웃후 이동할 주소";
       });
     }
   }
