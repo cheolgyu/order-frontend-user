@@ -21,8 +21,15 @@ export default {
   head: {
     titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
+    script: [
+      { src: '/js/oauth/google.js' },
+      { src: '/js/oauth/kakao.min.js' },
+      { src: '/js/oauth/naver.js' }
+    ],
     meta: [
       { charset: 'utf-8' },
+      { name: 'google-signin-scope', content: 'profile email' },
+      { name: 'google-signin-client_id', content: '1005064078865-gsa27coobktnmahle5360mf6685t7jcd.apps.googleusercontent.com' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
