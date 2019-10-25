@@ -1,11 +1,20 @@
 <template>
   <v-card>
     <v-card>
-      <div>
-        <btn_google />
-        <btn_kakao />
-        <btn_naver />
-      </div>
+      <v-card-title primary-title>로그인</v-card-title>
+      <v-card-text>
+        <v-card>
+          <v-card-text>
+            <btn_google />
+          </v-card-text>
+          <v-card-text>
+            <btn_kakao />
+          </v-card-text>
+          <v-card-text>
+            <btn_naver />
+          </v-card-text>
+        </v-card>
+      </v-card-text>
     </v-card>
   </v-card>
 </template>

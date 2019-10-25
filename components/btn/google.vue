@@ -1,9 +1,5 @@
  <template>
-  <div>
-    <div>
-      <div id="my-signin2"></div>
-    </div>
-  </div>
+  <div id="my-signin2"></div>
 </template>
  
  <script>
@@ -11,8 +7,8 @@ export default {
   mounted() {
     window.gapi.signin2.render("my-signin2", {
       scope: "profile email",
-      width: 300,
-      height: 70,
+      width: 222,
+      height: 49,
       longtitle: true,
       theme: "dark",
       onsuccess: this.onsuccess,

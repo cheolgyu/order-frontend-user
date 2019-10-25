@@ -1,7 +1,5 @@
  <template>
-  <div>
-    <div id="naverIdLogin"></div>
-  </div>
+  <div id="naverIdLogin"></div>
 </template>
  
  <script>
@@ -25,7 +23,8 @@ export default {
         loginButton: {
           color: "green",
           type: 3,
-          height: 60
+          width: 200,
+          height: 49
         } /* 로그인 버튼의 타입을 지정 */
       });
 

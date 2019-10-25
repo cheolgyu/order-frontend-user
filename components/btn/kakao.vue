@@ -1,9 +1,5 @@
  <template>
-  <div>
-    <div>
-      <div id="kakao-login-btn"></div>
-    </div>
-  </div>
+  <div id="kakao-login-btn"></div>
 </template>
  
  <script>
@@ -21,6 +17,7 @@ export default {
       window.Kakao.Auth.createLoginButton({
         container: "#kakao-login-btn",
         scope: "account_email",
+        size: "medium",
         success: function(authObj) {
           var res = Kakao.API.request({
             url: "/v2/user/me",
