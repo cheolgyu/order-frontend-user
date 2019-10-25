@@ -11,7 +11,7 @@ export default {
   methods: {
     go2() {
       if (!window.Kakao.isInitialized()) {
-        window.Kakao.init("d2d9de95761c8199102ae1b822359fe4");
+        window.Kakao.init(process.env.VUE_APP_OAUTH_KAKAO_CLIENT_ID);
       }
 
       window.Kakao.Auth.createLoginButton({
@@ -22,7 +22,6 @@ export default {
           var res = Kakao.API.request({
             url: "/v2/user/me",
             success: function(resp) {
-              console.log(resp);
               var user = {
                 type: "kakao",
                 id: resp.id,

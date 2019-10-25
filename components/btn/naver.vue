@@ -16,8 +16,8 @@ export default {
   methods: {
     go() {
       var naverLogin = new window.naver.LoginWithNaverId({
-        clientId: "5PuQOvRKDQe64zz4EEXF",
-        callbackUrl: "http://localhost:3333/login",
+        clientId: process.env.VUE_APP_OAUTH_NAVER_CLIENT_ID,
+        callbackUrl: process.env.VUE_APP_OAUTH_NAVER_CALLBACK,
         isPopup: true /* 팝업을 통한 연동처리 여부 */,
         callbackHandle: false,
         loginButton: {
