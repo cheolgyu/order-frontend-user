@@ -8,7 +8,7 @@ self.addEventListener('install', function (e) {
         })
     );
 });
-/*
+
 self.addEventListener('fetch', function (e) {
     console.log("fetch:", e.request.url);
     e.respondWith(
@@ -17,7 +17,7 @@ self.addEventListener('fetch', function (e) {
         })
     );
 });
-*/
+
 
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here, other Firebase libraries

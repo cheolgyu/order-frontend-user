@@ -91,7 +91,6 @@ export default {
     title: "사용자"
   }),
   created() {
-    console.log(this.$store);
     this.$vuetify.theme.dark = true;
   },
   computed: {
