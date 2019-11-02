@@ -62,10 +62,7 @@ export default {
           ssr: false
         },
         */
-    {
-      src: '~/plugins/firebase.js',
-      ssr: false
-    },
+
   ],
   /*
   ** Nuxt.js modules
@@ -74,7 +71,6 @@ export default {
     '@nuxtjs/vuetify',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa', ,
     '@nuxtjs/dotenv'
   ],
   dotenv: {

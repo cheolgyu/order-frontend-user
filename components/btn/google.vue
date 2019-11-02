@@ -27,7 +27,9 @@ export default {
         img: profile.getImageUrl(),
         email: profile.getEmail()
       };
-      this.$store.dispatch("user/in", user, { root: true }).then(res => {});
+      window.$nuxt.$store
+        .dispatch("user/in", user, { root: true })
+        .then(res => {});
     },
     onfailure(err) {
       console.error("google login onfailure", err);

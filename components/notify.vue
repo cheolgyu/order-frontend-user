@@ -62,7 +62,7 @@ export default {
   methods: {
     permission: function(event) {
       if (!("Notification" in window)) {
-        alert("This browser does not support system notifications");
+        //alert("This browser does not support system notifications");
         // This is not how you would really do things if they aren't supported. :)
         return "";
       } else {
@@ -76,7 +76,7 @@ export default {
     },
     notify_icon() {
       if (this.notify == "") {
-        alert("222his browser does not support system notifications");
+        //alert("222his browser does not support system notifications");
       } else if (this.notify == "granted") {
         this.icon = "notifications_none";
       } else if (this.notify == "denied") {
