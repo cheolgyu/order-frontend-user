@@ -7,13 +7,14 @@ var firebase = require("firebase/app");
 require("firebase/messaging");
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDeFOTllKAw1sHpK4OBFLOtmT4pFx5K3go",
-    authDomain: "order-99f38.firebaseapp.com",
-    databaseURL: "https://order-99f38.firebaseio.com",
-    projectId: "order-99f38",
-    storageBucket: "",
-    messagingSenderId: "371794845174",
-    appId: "1:371794845174:web:f0a19ab33f3ed85c"
+    apiKey: "AIzaSyAnXl3oOClLjsSEZOLpX3wVjvot6FZk13c",
+    authDomain: "macro-parity-237003.firebaseapp.com",
+    databaseURL: "https://macro-parity-237003.firebaseio.com",
+    projectId: "macro-parity-237003",
+    storageBucket: "macro-parity-237003.appspot.com",
+    messagingSenderId: "411774737290",
+    appId: "1:411774737290:web:168da462a8d07f467e8673",
+    measurementId: "G-H4NYJSR149"
 };
 
 
@@ -21,7 +22,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
-const YOUR_PUBLIC_VAPID_KEY_HERE = "BFE1Zmtf2K7IAo7WpUinwGUxpRgIg-cVYMPjYCgHYo7zlIfpsaA3dokWNqwtK_vVIosdGuqjrRZEe6fAz27EgZ0";
+const YOUR_PUBLIC_VAPID_KEY_HERE = "BCsmDhzVAsf2quJnbUwAmqeKVsXN-3GvnYqhX3zdWNNburJrZCPE572LqHwAV6NW0SkVG7aQRkyWCtfPC12Z5ZA";
 messaging.usePublicVapidKey(YOUR_PUBLIC_VAPID_KEY_HERE);
 
 Vue.prototype.$fb_sw_token = null;
