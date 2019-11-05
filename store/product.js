@@ -12,6 +12,11 @@ export const state = () => ({
 
 export const actions = {
     init_list({ commit, rootState }, params) {
+        for (var i = 0; i < params.length; i++) {
+            if (params[i].og[0].og_id == null) {
+                params[i].og = [];
+            }
+        }
         commit("INIT_LIST", params);
     },
     comm_update_og({ commit, rootState }, params) {
