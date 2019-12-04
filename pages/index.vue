@@ -27,17 +27,14 @@ export default {
     shops: "get_shops"
   }),
   fetch({ store, params }) {
-    store.dispatch("get_shops", params).then(res => {
-      
-     
-    });
+    store.dispatch("get_shops", params).then(res => {});
   },
   methods: {
     gg() {
       var key =
-        "AAAAVpCzHfY:APA91bFLY-EfGQCoECkl4eYb7g3cLxNSA4pVVcXkubHqSKk4BgcJ9zh9_WU93BnPSozmOxNyD2gibMAyQ3oavkaTDWhyYwYwysn6N9J_moUsz6Eff42u7nyJNa54QsbsNSyP2NqGOCWG";
+        "AAAAX9-v24o:APA91bEkdPbIZ6ydVx_iKX2dTetDgvWvCCN06qCCE9cnjIKmHKeW5njSKc3T7WoIAlTVePc6TS_ko1bZZvNs8KbeJ0LhnoxF7KVVBeh7wooq6mgxnvHDjJ90twImM4c4GEl9nVML5c-9";
       var to =
-        "cksPMoBdGEs:APA91bG9tzqfByJDuxoeD7F-c2w8ENhZvtl6fxHaujVuXeFeD1cJYoAsYyz0rLB-4G3bBZMC4TwoSr1W_EGKdwIpFanOppFXDc22O72yLfH_KIZ2Wm50NXFpft0EfcGQ8oBP_3PYkruw";
+        "fKK6yhzqovg:APA91bH3yoToZMJbKHwad0yge6CokVz1QprJIPkcZN7eTsD056U4xo8JkU71HC7awAqxOGjopA0CETuTigtuiTl6shiWm4PJIWQe-eEDb8ob6oEwepUvkMkwk_0yMGgWOGpMYalK2lSE";
       var notification = {
         title: "Portugal vs. Denmark",
         body: "5 to 1",
@@ -52,13 +49,12 @@ export default {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          notification: notification,
-          to: to
+          to: to,
+          collapse_key: "type_a",
+          notification: notification
         })
       })
-        .then(function(response) {
-          
-        })
+        .then(function(response) {})
         .catch(function(error) {
           console.error(error);
         });

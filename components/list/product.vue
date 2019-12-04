@@ -23,7 +23,6 @@
                 </v-btn>
               </v-list-item-action>
             </template>
-
             <template v-slot:appendIcon></template>
             <v-list-item v-for="(og,i2) in p.og" :key="i+'_'+i2">
               <v-list-item-content>

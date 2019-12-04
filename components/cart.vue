@@ -73,7 +73,7 @@ export default {
       this.dialog.show = true;
     },
     fn_buy() {
-      this.$store.dispatch("order/buy", this.$fb_sw_token);
+      this.$store.dispatch("order/buy");
     },
 
     update(item, idx) {
